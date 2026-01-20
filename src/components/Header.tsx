@@ -21,10 +21,10 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            <a href="#como-funciona" className="text-muted-foreground hover:text-foreground transition-colors font-medium">
+            <a href="/# como-funciona" className="text-muted-foreground hover:text-foreground transition-colors font-medium">
               ¿Cómo funciona?
             </a>
-            <a href="#testimonios" className="text-muted-foreground hover:text-foreground transition-colors font-medium">
+            <a href="/#testimonios" className="text-muted-foreground hover:text-foreground transition-colors font-medium">
               Testimonios
             </a>
           </nav>
