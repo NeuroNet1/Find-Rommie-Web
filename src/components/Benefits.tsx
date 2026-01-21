@@ -44,7 +44,7 @@ const Benefits = () => {
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
               ¿Por qué elegir{" "}
-              <span className="text-green-600">Find Me Roomie?</span>
+              <span className="text-red-700">Find Me Roomie?</span>
             </h2>
             <p className="text-lg text-muted-foreground">
               La plataforma más confiable para encontrar tu próximo hogar compartido en Colombia.

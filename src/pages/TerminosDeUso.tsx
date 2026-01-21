@@ -106,7 +106,7 @@ const TerminosDeUso = () => {
           <div className="max-w-4xl mx-auto text-center animate-fade-up">
 
 
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl gradient-coral mb-6 shadow-card">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl gradient-beige mb-6 shadow-card">
               <Scale className="w-10 h-10 text-secondary-foreground" />
             </div>
 
@@ -184,7 +184,7 @@ const TerminosDeUso = () => {
             {/* Contact Section */}
             <div className="glass-card rounded-2xl p-6 md:p-8 shadow-card bg-secondary/5 border-secondary/20 animate-fade-up">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl gradient-coral flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 rounded-xl gradient-beige flex items-center justify-center flex-shrink-0">
                   <Mail className="w-6 h-6 text-secondary-foreground" />
                 </div>
                 <div className="flex-1">
@@ -194,7 +194,7 @@ const TerminosDeUso = () => {
                   <p className="text-muted-foreground mb-4">
                     Si tienes alguna pregunta sobre estos términos de uso o necesitas aclaraciones, nuestro equipo está aquí para ayudarte.
                   </p>
-                  <Button asChild className="gradient-coral text-secondary-foreground">
+                  <Button asChild className="gradient-beige text-secondary-foreground">
                     <a href="mailto:soporte@findmeroomie.com">
                       Contactar Soporte
                     </a>

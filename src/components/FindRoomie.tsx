@@ -53,7 +53,7 @@ const FindRoomie = () => {
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Conecta con personas{" "}
-            <span className="text-green-600">afines a ti</span>
+            <span className="text-red-700">afines a ti</span>
           </h2>
           <p className="text-lg text-muted-foreground">
             Descubre perfiles de personas que buscan compartir con estilos de vida compatibles con el tuyo.
@@ -102,7 +102,7 @@ const FindRoomie = () => {
                 ))}
               </div>
 
-             
+
             </div>
           ))}
         </div>

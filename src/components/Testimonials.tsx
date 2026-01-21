@@ -42,7 +42,7 @@ const Testimonials = () => {
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
               Historias de{" "}
-              <span className="text-green-600">éxito real</span>
+              <span className="text-red-700">éxito real</span>
             </h2>
             <p className="text-lg text-muted-foreground">
               Miles de personas ya encontraron su hogar ideal a través de nuestra plataforma.

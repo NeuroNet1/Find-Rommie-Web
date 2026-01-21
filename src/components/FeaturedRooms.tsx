@@ -65,7 +65,7 @@ const FeaturedRooms = () => {
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
               Espacios que te{" "}
-              <span className="text-green-600">encantarán</span>
+              <span className="text-red-700">encantarán</span>
             </h2>
           </div>
         </div>

@@ -33,7 +33,7 @@ const HowItWorks = () => {
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
               Encuentra tu espacio en{" "}
-              <span className="text-green-600">3 simples pasos</span>
+              <span className="text-red-700">3 simples pasos</span>
             </h2>
             <p className="text-lg text-muted-foreground">
               Conectamos personas que buscan habitaciones con quienes las ofrecen. Sin complicaciones.
