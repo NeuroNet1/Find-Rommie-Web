@@ -5,8 +5,8 @@ import HowItWorks from "@/components/HowItWorks";
 import Benefits from "@/components/Benefits";
 import FeaturedRooms from "@/components/FeaturedRooms";
 import FindRoomie from "@/components/FindRoomie";
-import Testimonials from "@/components/Testimonials";
-import CTASection from "@/components/CTASection";
+import SocialProof from "@/components/SocialProof";
+import DownloadApp from "@/components/DownloadApp";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -34,12 +34,8 @@ const Index = () => {
       </div>
       <main>
         <HeroSection />
-        <HowItWorks />
-        <Benefits />
-        <FeaturedRooms />
-        <FindRoomie />
-        <Testimonials />
-        <CTASection />
+        <SocialProof />
+        <DownloadApp />
       </main>
       <Footer />
     </div>

@@ -1,107 +1,86 @@
-import { Home, Instagram, Facebook, Twitter } from "lucide-react";
+import React from 'react';
+import { Facebook, Instagram, Twitter, ArrowRight } from 'lucide-react';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
-  const links = {
-    plataforma: [
-      { label: "Buscar habitación", href: "#" },
-      { label: "Publicar habitación", href: "#" },
-      { label: "Ver roomies", href: "#" },
-      { label: "Ciudades", href: "#" },
-    ],
-    empresa: [
-      { label: "Sobre nosotros", href: "#" },
-      { label: "Trabaja con nosotros", href: "#" },
-    ],
-    soporte: [
-      { label: "Centro de ayuda", href: "#" },
-      { label: "Seguridad", href: "#" },
-      { label: "Términos de uso", href: "/TerminosDeUso" },
-      { label: "Privacidad", href: "/Privacidad" },
-    ],
-  };
-
   return (
-    <footer className="bg-foreground text-background py-16 lg:py-20">
-      <div className="container mx-auto px-4">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
-          {/* Brand */}
-          <div className="lg:col-span-2">
-            <a href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl gradient-hero flex items-center justify-center">
-                <Home className="w-5 h-5 text-primary-foreground" />
-              </div>
-              <span className="text-xl font-bold text-background">
-                Find Me Roomie
-              </span>
-            </a>
-            <p className="text-background/70 mb-6 max-w-xs">
-              La plataforma #1 en Mexico para encontrar habitaciones y roommates confiables.
-            </p>
-            <div className="flex items-center gap-2">
-              <span className="text-2xl">🇨🇴</span>
-              <span className="text-background/70 text-sm">Hecho para Mexico</span>
-            </div>
-          </div>
+    <footer className="relative py-20 bg-[#F8E4D5] overflow-hidden border-t border-[#B21E06]/10">
+      {/* Window pane shadows simulation with branding color */}
+      <div className="absolute inset-0 pointer-events-none opacity-10">
+        <div className="absolute inset-0"
+          style={{
+            backgroundImage: 'linear-gradient(90deg, transparent 49%, rgba(178, 30, 6, 0.2) 50%, transparent 51%), linear-gradient(0deg, transparent 49%, rgba(178, 30, 6, 0.2) 50%, transparent 51%)',
+            backgroundSize: '40% 40%'
+          }}>
+        </div>
+      </div>
 
-          {/* Links */}
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-20">
           <div>
-            <h4 className="font-bold text-background mb-4">Plataforma</h4>
+            <h4 className="text-2xl font-bold mb-6 text-[#1A1A1A]">Explora</h4>
             <ul className="space-y-3">
-              {links.plataforma.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-background/70 hover:text-background transition-colors text-sm">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              <li><a href="#" className="text-[#1A1A1A] opacity-70 hover:opacity-100 hover:text-[#B21E06] transition-all">Cómo funciona</a></li>
+              <li><a href="#" className="text-[#1A1A1A] opacity-70 hover:opacity-100 hover:text-[#B21E06] transition-all">Seguridad</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold text-background mb-4">Empresa</h4>
+            <h4 className="text-2xl font-bold mb-6 text-[#1A1A1A]">Recursos</h4>
             <ul className="space-y-3">
-              {links.empresa.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-background/70 hover:text-background transition-colors text-sm">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              <li><a href="#" className="text-[#1A1A1A] opacity-70 hover:opacity-100 hover:text-[#B21E06] transition-all">Guías de Zonas</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold text-background mb-4">Soporte</h4>
+            <h4 className="text-2xl font-bold mb-6 text-[#1A1A1A]">Ayuda</h4>
             <ul className="space-y-3">
-              {links.soporte.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-background/70 hover:text-background transition-colors text-sm">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              <li><a href="#" className="text-[#1A1A1A] opacity-70 hover:opacity-100 hover:text-[#B21E06] transition-all">Soporte</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-2xl font-bold mb-6 text-[#1A1A1A]">Legal</h4>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-[#1A1A1A] opacity-70 hover:opacity-100 hover:text-[#B21E06] transition-all">Términos Legales</a></li>
+              <li><a href="#" className="text-[#1A1A1A] opacity-70 hover:opacity-100 hover:text-[#B21E06] transition-all">Privacidad</a></li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="pt-8 border-t border-background/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-background/50 text-sm">
-            © {currentYear} Find Me Roomie. Todos los derechos reservados.
-          </p>
-          <div className="flex items-center gap-4">
-            <a href="#" className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-background/20 transition-colors">
-              <Instagram className="w-5 h-5 text-background" />
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-background/20 transition-colors">
-              <Facebook className="w-5 h-5 text-background" />
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-background/20 transition-colors">
-              <Twitter className="w-5 h-5 text-background" />
-            </a>
+        <div className="flex flex-col md:flex-row items-center justify-between gap-12 pb-12">
+          {/* Newsletter Input with Branding Colors */}
+          <div className="relative w-full max-w-lg">
+            <div className="flex items-center bg-white/50 backdrop-blur-sm border-2 border-[#B21E06] rounded-full overflow-hidden p-1 shadow-md">
+              <input
+                type="text"
+                placeholder="Recibir alertas de habitaciones"
+                className="flex-1 bg-transparent px-6 py-3 text-[#1A1A1A] outline-none placeholder:text-[#1A1A1A]/50"
+              />
+              <button className="bg-[#B21E06] hover:bg-[#8B1705] p-3 rounded-full transition-colors m-1">
+                <ArrowRight className="w-5 h-5 text-white" />
+              </button>
+            </div>
           </div>
+
+          {/* Social Icons with Branding Colors */}
+          <div className="flex flex-col items-center md:items-end gap-3">
+            <div className="flex gap-4">
+              <a href="#" className="w-12 h-12 rounded-full border border-[#B21E06] flex items-center justify-center text-[#B21E06] hover:bg-[#B21E06] hover:text-white transition-all">
+                <Facebook className="w-6 h-6" />
+              </a>
+              <a href="#" className="w-12 h-12 rounded-full border border-[#B21E06] flex items-center justify-center text-[#B21E06] hover:bg-[#B21E06] hover:text-white transition-all">
+                <Instagram className="w-6 h-6" />
+              </a>
+              <a href="#" className="w-12 h-12 rounded-full border border-[#B21E06] flex items-center justify-center text-[#B21E06] hover:bg-[#B21E06] hover:text-white transition-all">
+                <Twitter className="w-6 h-6" />
+              </a>
+            </div>
+            <p className="font-bold text-sm text-[#1A1A1A]">@ Find My Roomie</p>
+          </div>
+        </div>
+
+        <div className="pt-8 text-center border-t border-[#B21E06]/10">
+          <p className="text-sm font-medium text-[#1A1A1A]/40">© 2024 Find My Roomie. Todos los derechos reservados</p>
         </div>
       </div>
     </footer>
