@@ -14,8 +14,8 @@ const Index = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show header when scrolled past 200vh, aligning with the end of Hero animation
-      setShowHeader(window.scrollY > window.innerHeight * 2);
+      // Show header when scrolled past 300vh, aligning with the end of Hero animation
+      setShowHeader(window.scrollY > window.innerHeight * 3);
     };
 
     window.addEventListener("scroll", handleScroll);
