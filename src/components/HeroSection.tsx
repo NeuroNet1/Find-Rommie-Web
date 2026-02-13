@@ -1,64 +1,110 @@
-import appIcon from "@/assets/app-icon.png";
-import room1 from "@/assets/room-1.jpg";
+import { useEffect, useState, useRef } from "react";
+
+// Import all frames from the assets folder
+const frameModules = import.meta.glob("../assets/frames/*.{png,jpg,jpeg,webp}", {
+  eager: true,
+  import: "default",
+});
+
+// Sort frames alphabetically to ensure correct sequence
+const frames = Object.keys(frameModules)
+  .sort()
+  .map((key) => frameModules[key] as string);
 
 const HeroSection = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [frameIndex, setFrameIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+
+      const rect = containerRef.current.getBoundingClientRect();
+      const scrollY = -rect.top;
+      const containerHeight = rect.height;
+      const viewportHeight = window.innerHeight;
+
+      // Total scrollable distance within this section
+      const totalScrollable = containerHeight - viewportHeight;
+
+      if (totalScrollable <= 0) return;
+
+      // Calculate progress from 0 to 1
+      const currentProgress = Math.min(Math.max(scrollY / totalScrollable, 0), 1);
+      setProgress(currentProgress);
+
+      // Determine which frame to show
+      const index = Math.min(
+        Math.floor(currentProgress * frames.length),
+        frames.length - 1
+      );
+      setFrameIndex(index);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    // Initial call to set state correctly
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src="/fondohero.jpeg"
-          alt="Background"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-white/5" />
-      </div>
-
-      {/* Logo - Top Left */}
-      <div className="absolute top-8 left-8 z-20 animate-fade-up">
-        <img
-          src="/logo1.png"
-          alt="Find My Roomie Logo"
-          className="h-12 sm:h-16 w-auto"
-        />
-      </div>
-      {/* Main Content Container */}
-      <div className="container relative mx-auto px-4 py-20 z-10">
-        <div className="flex flex-col items-center justify-center min-h-[80vh]">
-
-          {/* Text and Phones Container */}
-          <div className="grid lg:grid-cols-2 gap-8 items-center w-full max-w-6xl mb-12">
-
-            {/* Left Side - Text */}
-            <div className="space-y-4 animate-fade-up">
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
-                Your home.
-              </h1>
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
-                Your roomie.
-              </h1>
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
-                Your app.
-              </h1>
-            </div>
-
-          </div>
-
-          {/* CTA Buttons - Centered at Bottom */}
-          <div className="flex flex-wrap items-center justify-center gap-4 animate-fade-up" style={{ animationDelay: "0.3s" }}>
-            <button className="px-8 py-4 bg-[#C1403D] text-white rounded-full font-semibold text-lg hover:bg-[#A03532] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
-              Find Roomie
-            </button>
-            <button className="px-8 py-4 bg-white text-[#C1403D] border-2 border-[#C1403D] rounded-full font-semibold text-lg hover:bg-[#C1403D] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
-              Post Room
-            </button>
-          </div>
+    <div ref={containerRef} className="relative h-[300vh]">
+      <section className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
+        {/* Animated Frame Background */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          {frames.length > 0 && (
+            <img
+              src={frames[frameIndex]}
+              alt="Animated Background"
+              className="w-full h-full object-cover transition-transform duration-100 ease-linear"
+              style={{
+                transform: `scale(${1 + progress * 0.2})`,
+              }}
+            />
+          )}
+          {/* Subtle Overlay to ensure text readability */}
+          <div className="absolute inset-0 bg-black/10" />
         </div>
-      </div>
 
-      {/* Decorative gradient at bottom */}
-      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white/30 to-transparent pointer-events-none" />
-    </section>
+        {/* Logo - Appears at the end with buttons and navbar */}
+        <div
+          className="absolute top-8 left-8 z-20 transition-all duration-700"
+          style={{
+            opacity: progress > 0.85 ? 1 : 0,
+            transform: `translateY(${progress > 0.85 ? 0 : -20}px)`,
+            pointerEvents: progress > 0.85 ? 'auto' : 'none'
+          }}
+        >
+          <img
+            src="/logo1.png"
+            alt="Find My Roomie Logo"
+            className="h-12 sm:h-16 w-auto"
+          />
+        </div>
+
+        {/* CTA Buttons - Positioned at the bottom center */}
+        <div
+          className="absolute bottom-20 left-1/2 -translate-x-1/2 z-30 flex flex-wrap items-center justify-center gap-6 transition-all duration-700 w-full px-4"
+          style={{
+            opacity: progress > 0.85 ? 1 : 0,
+            transform: `translate(calc(-50% + 0px), ${progress > 0.85 ? 0 : 50}px)`,
+            pointerEvents: progress > 0.85 ? 'auto' : 'none'
+          }}
+        >
+          <button className="px-12 py-5 bg-[#C1403D] text-white rounded-full font-bold text-xl hover:bg-[#A03532] transition-all duration-300 shadow-2xl hover:shadow-red-900/20 hover:scale-105 active:scale-95">
+            Find Roomie
+          </button>
+          <button className="px-10 py-5 bg-white/80 backdrop-blur-md text-[#C1403D] border-2 border-[#C1403D] rounded-full font-bold text-xl hover:bg-[#C1403D] hover:text-white transition-all duration-300 shadow-2xl hover:scale-105 active:scale-95">
+            Post Room
+          </button>
+        </div>
+
+        {/* Decorative gradient at bottom */}
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white to-transparent pointer-events-none opacity-50" />
+      </section>
+    </div>
   );
 };
 

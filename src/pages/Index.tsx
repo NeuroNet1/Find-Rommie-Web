@@ -14,8 +14,8 @@ const Index = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show header when scrolled past 80vh (80% of viewport height)
-      setShowHeader(window.scrollY > window.innerHeight * 0.8);
+      // Show header when scrolled past 200vh, aligning with the end of Hero animation
+      setShowHeader(window.scrollY > window.innerHeight * 2);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -26,8 +26,8 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <div
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${showHeader
-            ? 'translate-y-0 opacity-100'
-            : '-translate-y-full opacity-0 pointer-events-none'
+          ? 'translate-y-0 opacity-100'
+          : '-translate-y-full opacity-0 pointer-events-none'
           }`}
       >
         <Header />
