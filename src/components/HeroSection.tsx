@@ -1,20 +1,47 @@
 import { useEffect, useState, useRef } from "react";
 
-// Import all frames from the assets folder
-const frameModules = import.meta.glob("../assets/frames/*.{png,jpg,jpeg,webp}", {
-  eager: true,
-  import: "default",
-});
-
-// Sort frames alphabetically to ensure correct sequence
-const frames = Object.keys(frameModules)
-  .sort()
-  .map((key) => frameModules[key] as string);
+// Hero frames are now served from the public folder for better performance and smaller bundle size
+const TOTAL_FRAMES = 37;
+const frames = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
+  `/frames/ezgif-frame-${(i + 1).toString().padStart(3, '0')}.png`
+);
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [frameIndex, setFrameIndex] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+
+  // Preload images for smooth animation
+  useEffect(() => {
+    let loadedCount = 0;
+    const preloadImages = () => {
+      onPreloadStart();
+      frames.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => {
+          loadedCount++;
+          if (loadedCount === frames.length) {
+            setImagesLoaded(true);
+          }
+        };
+        img.onerror = () => {
+          console.error(`Failed to load frame: ${src}`);
+          loadedCount++; // Still count it to avoid getting stuck
+          if (loadedCount === frames.length) {
+            setImagesLoaded(true);
+          }
+        };
+      });
+    };
+
+    const onPreloadStart = () => {
+      console.log("Starting frame preloading...");
+    };
+
+    preloadImages();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,14 +78,14 @@ const HeroSection = () => {
 
   return (
     <div ref={containerRef} className="relative h-[300vh]">
-      <section className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
+      <section className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-black">
         {/* Animated Frame Background */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           {frames.length > 0 && (
             <img
               src={frames[frameIndex]}
               alt="Animated Background"
-              className="w-full h-full object-cover transition-transform duration-100 ease-linear"
+              className={`w-full h-full object-cover transition-opacity duration-500 ease-in-out ${imagesLoaded ? 'opacity-100' : 'opacity-40'}`}
               style={{
                 transform: `scale(${1 + progress * 0.2})`,
               }}
@@ -66,23 +93,16 @@ const HeroSection = () => {
           )}
           {/* Subtle Overlay to ensure text readability */}
           <div className="absolute inset-0 bg-black/10" />
+
+          {/* Loading Indicator - only shows if it takes too long */}
+          {!imagesLoaded && (
+            <div className="absolute inset-0 flex items-center justify-center z-10">
+              <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin" />
+            </div>
+          )}
         </div>
 
-        {/* Logo - Appears at the end with buttons and navbar */}
-        <div
-          className="absolute top-8 left-8 z-20 transition-all duration-700"
-          style={{
-            opacity: progress > 0.85 ? 1 : 0,
-            transform: `translateY(${progress > 0.85 ? 0 : -20}px)`,
-            pointerEvents: progress > 0.85 ? 'auto' : 'none'
-          }}
-        >
-          <img
-            src="/logo1.png"
-            alt="Find My Roomie Logo"
-            className="h-12 sm:h-16 w-auto"
-          />
-        </div>
+
 
         {/* CTA Buttons - Positioned at the bottom center */}
         <div
